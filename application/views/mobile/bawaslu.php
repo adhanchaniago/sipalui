@@ -12,7 +12,7 @@
 	<div class="content mt-0 mb-0">
 		<div class="list-group list-custom-small list-icon-0">
 			<?php foreach($bawaslu as $row): ?>
-			<a href="<?=site_url('mobile/kejaksaan_detail/'.$row->id_bawaslu)?>">
+			<a href="<?=site_url('mobile/bawaslu_detail/'.$row->id_bawaslu)?>">
 				<span><?=$row->nama?></span><i class="fa fa-angle-right"></i>
 			</a>
 			<?php endforeach; ?>

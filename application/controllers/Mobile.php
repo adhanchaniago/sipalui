@@ -65,6 +65,24 @@ class Mobile extends CI_Controller {
 		$this->load->view('mobile/index', $data);
 	}
 
+	public function paslon(){
+		$pol = $this->db->get('pemilu')->result();
+		$data['page'] = 'pemilu';
+		$data['title'] = 'Daftar Paslon';
+		$data['pemilu'] = $pol;
+		$this->load->view('mobile/index', $data);
+	}
+
+	public function paslon_detail($id){
+		$pemilu = $this->db->get_where('pemilu', array('id_pemilu' => $id))->row();
+		$paslon = $this->db->get_where('paslon', array('id_pemilu' => $id))->result();
+
+		$data['page'] = 'pemilu/detail';
+		$data['title'] = $pemilu->nama;
+		$data['paslon'] = $paslon;
+		$this->load->view('mobile/index', $data);
+	}
+
 	public function penyelenggara(){
 		$kpu = $this->db->get_where('kpu', array('id_sub' => NULL))->result();
 		$data['page'] = 'penyelenggara';
@@ -100,6 +118,15 @@ class Mobile extends CI_Controller {
 		$this->load->view('mobile/index', $data);
 	}
 
+	public function kepolisian_detail_view($id){
+		$pol = $this->db->get_where('kepolisian', array('id_kepolisian' => $id))->row();
+
+		$data['page'] = 'kepolisian/detail_view';
+		$data['title'] = $pol->nama;
+		$data['detail'] = $pol;
+		$this->load->view('mobile/index', $data);
+	}
+
 	public function kejaksaan(){
 		$kjk = $this->db->get_where('kejaksaan', array('id_sub' => NULL))->result();
 		$data['page'] = 'kejaksaan';
@@ -127,10 +154,12 @@ class Mobile extends CI_Controller {
 
 	public function bawaslu_detail($id){
 		$bawaslu = $this->db->get_where('bawaslu', array('id_bawaslu' => $id))->row();
+		$anggota = $this->db->get_where('anggota_bawaslu', array('id_bawaslu' => $id))->result();
 
 		$data['page'] = 'bawaslu/detail';
 		$data['title'] = $bawaslu->nama;
 		$data['detail'] = $bawaslu;
+		$data['anggota'] = $anggota;
 		$this->load->view('mobile/index', $data);
 	}
 
@@ -160,6 +189,12 @@ class Mobile extends CI_Controller {
 	public function laporan(){
 		$data['page'] = 'laporan';
 		$data['title'] = 'Laporan';
+		$this->load->view('mobile/index', $data);
+	}
+
+	public function penanganan(){
+		$data['page'] = 'penanganan';
+		$data['title'] = 'Penanganan Kasus';
 		$this->load->view('mobile/index', $data);
 	}
 }

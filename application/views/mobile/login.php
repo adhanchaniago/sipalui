@@ -52,33 +52,62 @@ Sistem Informasi Pemilukada Aman & Lancar
 </div>
 
 <div id="login-masyarakat" class="menu menu-box-bottom menu-box-detached rounded-m" data-menu-height="320" data-menu-effect="menu-over">
+	<div class="content mb-0">
+		<h1 class="font-700 mb-0">Login</h1>
+		<p class="font-11  mt-n1 mb-0">
+		Login Masyarakat
+		</p>
+		<form action="<?=site_url('login/doLogin')?>" method="POST">
+		<div class="input-style has-icon input-style-1 input-required">
+			<i class="input-icon fa fa-user font-11"></i>
+			<span>Username</span>
+			<input type="name" placeholder="Username" name="nama">
+		</div>
+			<div class="input-style has-icon input-style-1 input-required">
+			<i class="input-icon fa fa-lock font-11"></i>
+			<span>NIK</span>
+			<input type="number" placeholder="NIK" name="nik">
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<a data-menu="menu-signup" href="#" class="float-right font-10"></a>
+				<div class="clearfix"></div>
+			</div>
+			<div class="col-6">
+				<a data-menu="daftar-masyarakat" href="#" class="float-right font-10">Create Account</a>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<a href="<?=site_url('mobile/menu')?>" class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-900 bg-green1-dark mt-4">LOGIN</a>
+		</form>
+	</div>
+</div>
+
+<div id="daftar-masyarakat" class="menu menu-box-bottom menu-box-detached rounded-m" data-menu-height="370" data-menu-effect="menu-over">
 <div class="content mb-0">
-<h1 class="font-700 mb-0">Login</h1>
+<h1 class="font-700 mb-0">Daftar</h1>
 <p class="font-11  mt-n1 mb-0">
-Login Masyarakat
+Daftar Untuk Masyarakat
 </p>
 <div class="input-style has-icon input-style-1 input-required">
 <i class="input-icon fa fa-user font-11"></i>
-<span>Username</span>
-<em>(required)</em>
-<input type="name" placeholder="Username">
+<span>Nama Lengkap</span>
+<input type="name" placeholder="Username" name="nama">
+</div>
+<div class="input-style has-icon input-style-1 input-required">
+<i class="input-icon fa fa-at"></i>
+<span>NIk</span>
+<input type="number" placeholder="Email" name="nik">
 </div>
 <div class="input-style has-icon input-style-1 input-required">
 <i class="input-icon fa fa-lock font-11"></i>
 <span>Password</span>
-<em>(required)</em>
-<input type="password" placeholder="Password">
+<input type="password" placeholder="Choose a Password">
 </div>
-<div class="row">
-<div class="col-6">
-<a href="#" data-menu="menu-forgot" class="font-10">Forgot Password?</a>
-</div>
-<div class="col-6">
-<a data-menu="menu-signup" href="#" class="float-right font-10">Create Account</a>
-<div class="clearfix"></div>
-</div>
-</div>
-<a href="<?=site_url('azures/home')?>" class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-900 bg-green1-dark mt-4">LOGIN</a>
+<p class="text-center pb-0 mb-n1 pt-1">
+<a href="#" data-menu="login-masyarakat" class="text-center font-11 color-gray2-dark">Sudah Punya Akun? Login Disini</a>
+</p>
+<a href="#" class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-900 bg-blue2-dark mt-4">Register</a>
 </div>
 </div>
 

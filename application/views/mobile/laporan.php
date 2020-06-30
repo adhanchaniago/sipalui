@@ -9,7 +9,7 @@
 
 <div class="card card-style contact-form">
 	<div class="content">
-		<form action="<?=site_url('mobile/laporan')?>" method="post" class="contactForm" id="contactForm">
+		<form action="<?=site_url('mobile/laporan_save')?>" method="post" class="contactForm" id="contactForm">
 			<fieldset>
 				<a href="cam:">
 				<div class="form-field form-name">
