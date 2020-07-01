@@ -7,16 +7,101 @@ class Login extends CI_Controller {
     {
         parent::__construct();
         $this->load->database();
+        $this->load->library('session');
     }
 
 	public function index()
 	{
-		redirect('mobile/menu', 'refresh');
+		if ($this->session->userdata('user_login') == 1){
+            redirect(site_url('users/menu'), 'refresh');
+        }elseif ($this->session->userdata('petugas_login') == 1){
+            redirect(site_url('petugas/menu'), 'refresh');
+        }else{
+	        $this->load->view('login');
+	    }
 	}
 	
 	public function login()
 	{
-		$this->load->view('mobile/login');
+		$this->load->view('login');
+	}
+
+	function daftar_masy()
+	{
+		$data['nama'] = $this->input->post('nama');
+		$data['nik'] = $this->input->post('nik');
+
+		$cek = $this->db->get_where('user', array('nik' => $data['nik']));
+		if ($cek->num_rows() > 0) {
+			$this->session->set_flashdata('error', 'NIK sudah ada, Silahkan Login');
+            redirect('login/login', 'refresh');
+		} else {
+			$up = $this->db->insert('user',$data);
+			if ($up) {
+				$this->session->set_flashdata('success', 'NIK Berhasil di Daftarkan, Silahkan Login');
+                redirect('login/login', 'refresh');
+			} else {
+				$this->session->set_flashdata('error', 'NIK Gagal di Daftarkan');
+                redirect('login/login', 'refresh');
+			}
+		}
+	}
+
+	function doLogin_masy(){
+		$data['nik'] = $this->input->post('nik');
+
+		$cek = $this->db->get_where('user', array('nik' => $data['nik']));
+		if ($cek->num_rows() > 0) {
+			$row = $cek->row();
+			$this->session->set_userdata('user_login', '1');
+			$this->session->set_userdata('nama', $row->nama);
+			$this->session->set_userdata('id_user', $row->id_user);
+			$this->session->set_userdata('nik', $row->nik);
+
+			redirect('users/menu');
+		} else {
+			$this->session->set_flashdata('error', 'NIK belum didaftarkan');
+            redirect('login/login');
+		}
+	}
+
+	function daftar_petugas()
+	{
+		$data['nama'] = $this->input->post('nama');
+		$data['nrp'] = $this->input->post('nrp');
+
+		$cek = $this->db->get_where('petugas', array('nrp' => $data['nrp']));
+		if ($cek->num_rows() > 0) {
+			$this->session->set_flashdata('error', 'NRP sudah ada, Silahkan Login');
+            redirect('login/login', 'refresh');
+		} else {
+			$up = $this->db->insert('petugas',$data);
+			if ($up) {
+				$this->session->set_flashdata('success', 'NRP Berhasil di Daftarkan, Silahkan Login');
+                redirect('login/login', 'refresh');
+			} else {
+				$this->session->set_flashdata('error', 'NRP Gagal di Daftarkan');
+                redirect('login/login', 'refresh');
+			}
+		}
+	}
+
+	function doLogin_petugas(){
+		$data['nrp'] = $this->input->post('nrp');
+
+		$cek = $this->db->get_where('petugas', array('nrp' => $data['nrp']));
+		if ($cek->num_rows() > 0) {
+			$row = $cek->row();
+			$this->session->set_userdata('petugas_login', '1');
+			$this->session->set_userdata('nama', $row->nama);
+			$this->session->set_userdata('id_petugas', $row->id_petugas);
+			$this->session->set_userdata('nrp', $row->nrp);
+
+			redirect('petugas/menu', 'refresh');
+		} else {
+			$this->session->set_flashdata('error', 'NRP belum didaftarkan');
+            redirect('login/login', 'refresh');
+		}
 	}
 
 	public function menu(){
@@ -188,4 +273,10 @@ class Login extends CI_Controller {
 		$data['title'] = 'Penanganan Kasus';
 		$this->load->view('mobile/index', $data);
 	}
+
+	function logout() {
+      $this->session->sess_destroy();
+      $this->session->set_flashdata('success', 'logged_out');
+      redirect(site_url('login'), 'refresh');
+    }
 }

@@ -8,7 +8,7 @@ $route['pages/product-detail/(:any)'] = 'Product/detail_product/$1';
 $route['pages/product/search'] = 'Product/search/';
 $route['pages/about'] = 'Home/about';
 $route['pages/contact'] = 'Home/contact';
-$route['default_controller'] = 'Mobile';
+$route['default_controller'] = 'Login';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['pages/product-search/p'] = 'Product/search_product/';
